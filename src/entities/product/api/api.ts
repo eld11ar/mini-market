@@ -1,6 +1,6 @@
+import type { Category } from "@/entities/category";
 import { API_BASE_URL } from "@/shared/api/base";
-import { Product } from "./types";
-import { Category } from "@/entities/category";
+import type { Product } from "./types";
 
 export const productsApi = {
   async getAll(): Promise<Product[]> {
