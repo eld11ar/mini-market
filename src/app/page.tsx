@@ -1,3 +1,5 @@
-export default async function Home() {
- return <div>home</div>
+import { redirect } from "next/navigation";
+
+export default function Home() {
+  redirect("/products");
 }
