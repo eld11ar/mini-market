@@ -1,6 +1,6 @@
-import { Category } from "@/entities/category";
-import { ProductId } from "../model/types";
 import { queryOptions } from "@tanstack/react-query";
+import type { Category } from "@/entities/category";
+import type { ProductId } from "../model/types";
 import { productsApi } from "./api";
 
 export const productKeys = {

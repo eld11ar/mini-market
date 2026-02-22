@@ -1,9 +1,11 @@
 "use client";
 
+import { useQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
 import {
+  type Category,
   categoriesProcessor,
   categoryQueries,
-  type Category,
 } from "@/entities/category";
 import {
   Select,
@@ -14,8 +16,6 @@ import {
   SelectValue,
 } from "@/shared/ui/select";
 import { Skeleton } from "@/shared/ui/skeleton";
-import { useQuery } from "@tanstack/react-query";
-import { useMemo } from "react";
 
 type Props = {
   value: Nullable<Category>;

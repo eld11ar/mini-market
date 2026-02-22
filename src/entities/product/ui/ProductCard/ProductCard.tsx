@@ -1,10 +1,10 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import { cn } from "@/shared/lib/utils";
-import { ProductPresenter } from "../../model/types";
 import { Badge } from "@/shared/ui/badge";
 import { StarRating } from "@/shared/ui/star-rating";
 import { productsProcessor } from "../../lib/processor";
+import type { ProductPresenter } from "../../model/types";
 
 type Props = {
   product: ProductPresenter;
@@ -30,6 +30,7 @@ export const ProductCard = ({ product }: Props) => {
           />
         </div>
       </Link>
+      
       <div className="flex-1 flex flex-col gap-1 justify-between">
         <Badge variant="secondary" className="capitalize">
           {product.category}

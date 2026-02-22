@@ -1,6 +1,6 @@
 import { Star } from "lucide-react";
-import { cn } from "../lib/utils";
 import type { ComponentProps } from "react";
+import { cn } from "../lib/utils";
 
 interface Props extends ComponentProps<"div"> {
   rate: number;

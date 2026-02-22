@@ -1,4 +1,4 @@
 export { categoriesApi } from "./api/api";
-export * from "./api/types";
 export { categoryKeys, categoryQueries } from "./api/queries";
+export * from "./api/types";
 export { categoriesProcessor } from "./lib/processor";

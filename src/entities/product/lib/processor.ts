@@ -1,4 +1,4 @@
-import { Product } from "../api/types";
+import type { Product } from "../api/types";
 import type {
   ProductId,
   ProductPresenter,
