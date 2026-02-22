@@ -1,13 +1,14 @@
 "use client";
 
 import { type ComponentProps, useState } from "react";
-import type { Category } from "@/entities/category/api/types";
+import type { Category } from "@/entities/category";
 import {
   ProductCard,
   type ProductPresenterSortOption,
 } from "@/entities/product";
+import { AddToCartButton } from "@/features/cart/addToCartButton";
 import { CategoryFilter } from "@/features/product/categoryFilter";
-import { SortFilter } from "@/features/product/sortFilter/ui/SortFilter";
+import { SortFilter } from "@/features/product/sortFilter";
 import { cn } from "@/shared/lib/utils";
 import { useGetProducts } from "../lib/useGetProducts";
 import { useSortProducts } from "../lib/useSortProducts";
@@ -38,9 +39,13 @@ export const ProductList = ({ className, ...rest }: Props) => {
             <ProductSkeleton key={i} />
           ))
           : sorted.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))
-        }
+            <ProductCard
+              className="group relative"
+              key={product.id}
+              product={product}
+              onAddToCartAction={<AddToCartButton product={product} />}
+            />
+          ))}
       </div>
     </div>
   );

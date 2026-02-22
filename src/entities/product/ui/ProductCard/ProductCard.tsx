@@ -1,23 +1,25 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { ComponentProps, ReactNode } from "react";
 import { cn } from "@/shared/lib/utils";
 import { Badge } from "@/shared/ui/badge";
 import { StarRating } from "@/shared/ui/star-rating";
 import { productsProcessor } from "../../lib/processor";
 import type { ProductPresenter } from "../../model/types";
 
-type Props = {
+type Props = ComponentProps<"div"> & {
   product: ProductPresenter;
+  onAddToCartAction?: ReactNode;
 };
 
-export const ProductCard = ({ product }: Props) => {
+export const ProductCard = ({ product, onAddToCartAction, className, ...rest }: Props) => {
   const detailsLink = `/products/${product.id}`;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className={cn("flex flex-col gap-4", className)} {...rest}>
       <Link
         href={detailsLink}
-        className="bg-gray-100 rounded-2xl p-3 overflow-hidden"
+        className="group bg-gray-100 rounded-2xl p-3 overflow-hidden"
       >
         <div className="relative w-77 h-75 mx-auto">
           <Image
@@ -26,11 +28,11 @@ export const ProductCard = ({ product }: Props) => {
             fill
             placeholder="blur"
             blurDataURL={product.image}
-            className="object-contain object-center"
+            className="object-contain object-center transition-transform duration-300 group-hover:scale-105"
           />
         </div>
       </Link>
-      
+
       <div className="flex-1 flex flex-col gap-1 justify-between">
         <Badge variant="secondary" className="capitalize">
           {product.category}
@@ -52,6 +54,8 @@ export const ProductCard = ({ product }: Props) => {
           {productsProcessor.formatPrice(product.price)}
         </span>
       </div>
+
+      {onAddToCartAction}
     </div>
   );
 };
