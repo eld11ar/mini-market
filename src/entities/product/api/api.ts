@@ -16,7 +16,9 @@ export const productsApi = {
   },
 
   async get(id: number): Promise<Product> {
-    const res = await fetch(`${API_BASE_URL}/products/${id}`);
+    const res = await fetch(`${API_BASE_URL}/products/${id}`, {
+      next: { revalidate: 60 },
+    });
     return await res.json();
   },
 };
