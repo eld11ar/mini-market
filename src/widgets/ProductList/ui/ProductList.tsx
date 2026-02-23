@@ -1,5 +1,6 @@
 "use client";
 
+import { AlertCircle } from "lucide-react";
 import { type ComponentProps, useState } from "react";
 import type { Category } from "@/entities/category";
 import {
@@ -10,6 +11,7 @@ import { AddToCartButton } from "@/features/cart/addToCartButton";
 import { CategoryFilter } from "@/features/product/categoryFilter";
 import { SortFilter } from "@/features/product/sortFilter";
 import { cn } from "@/shared/lib/utils";
+import { Button } from "@/shared/ui/button";
 import { useGetProducts } from "../lib/useGetProducts";
 import { useSortProducts } from "../lib/useSortProducts";
 import { ProductSkeleton } from "./ProductSkeleton";
@@ -20,9 +22,22 @@ export const ProductList = ({ className, ...rest }: Props) => {
   const [category, setCategory] = useState<Nullable<Category>>(null);
   const [sort, setSort] = useState<ProductPresenterSortOption>("price-asc");
 
-  const { productsPresenterList, isLoading } = useGetProducts(category);
+  const { productsPresenterList, isLoading, isError, refetch } =
+    useGetProducts(category);
 
   const sorted = useSortProducts(productsPresenterList, sort);
+
+  if (isError) {
+    return (
+      <div className="flex flex-col items-center gap-4 py-24 text-center">
+        <AlertCircle className="size-12 text-destructive" />
+        <p className="text-sm text-muted-foreground">Failed to load products</p>
+        <Button variant="outline" onClick={() => refetch()}>
+          Try again
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <div className={cn("space-y-4 sm:space-y-6", className)} {...rest}>
