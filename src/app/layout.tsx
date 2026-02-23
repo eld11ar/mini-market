@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
-import Script from "next/script";
 import { TanstackProvider } from "@/shared/providers/TanstackProvider";
 import { TooltipProvider } from "@/shared/ui/tooltip";
 import { BaseLayout } from "@/widgets/Layout";
@@ -23,13 +22,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <Script
-          src="//unpkg.com/react-scan/dist/auto.global.js"
-          crossOrigin="anonymous"
-          strategy="beforeInteractive"
-        />
-      </head>
       <body className={`${dmSans.variable} antialiased`}>
         <TanstackProvider>
           <TooltipProvider>
