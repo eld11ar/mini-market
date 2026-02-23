@@ -1,6 +1,6 @@
-import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
-import Link from "next/link";
+import { ClearCartButton } from "@/features/cart/clearCartButton";
+import { BackButton } from "@/shared/ui/back-button";
 import { CartView } from "@/widgets/CartList";
 
 export const metadata: Metadata = {
@@ -12,12 +12,11 @@ export const metadata: Metadata = {
 export default function CartPage() {
   return (
     <section className="py-8 sm:py-14 space-y-8 sm:space-y-12">
-      <Link
-        href="/products"
-        className="w-fit flex items-center gap-2 text-xl sm:text-2xl font-bold"
-      >
-        <ArrowLeft /> <span>Your Cart</span>
-      </Link>
+      <div className="flex items-center justify-between">
+        <BackButton label="Your Cart" />
+
+        <ClearCartButton />
+      </div>
 
       <CartView />
     </section>

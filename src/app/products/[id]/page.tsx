@@ -1,9 +1,8 @@
-import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { productsApi, productsProcessor } from "@/entities/product";
 import { ChangeCartQuantity } from "@/features/cart/changeCartQuantity";
+import { BackButton } from "@/shared/ui/back-button";
 import { Badge } from "@/shared/ui/badge";
 import { StarRating } from "@/shared/ui/star-rating";
 
@@ -36,12 +35,7 @@ export default async function ProductPage({ params }: Props) {
 
   return (
     <section className="space-y-8 sm:space-y-12 py-8 sm:py-14">
-      <Link
-        href="/products"
-        className="w-fit flex items-center gap-2 text-xl sm:text-2xl font-bold"
-      >
-        <ArrowLeft /> <span>Products</span>
-      </Link>
+      <BackButton label="Products Details" />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 items-start gap-8 sm:gap-12 lg:gap-20">
         <div className="flex items-center justify-center bg-gray-100 rounded-2xl p-6">
