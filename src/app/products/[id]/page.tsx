@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { productsApi, productsProcessor } from "@/entities/product";
+import { notFound } from "next/navigation";
+import {
+  type ProductPresenter,
+  productsApi,
+  productsProcessor,
+} from "@/entities/product";
 import { ChangeCartQuantity } from "@/features/cart/changeCartQuantity";
 import { BackButton } from "@/shared/ui/back-button";
 import { Badge } from "@/shared/ui/badge";
@@ -29,8 +34,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ProductPage({ params }: Props) {
   const { id } = await params;
 
-  const product = await productsApi.get(Number(id));
-  const presenter = productsProcessor.toPresenter(product);
+  let presenter: ProductPresenter;
+
+  try {
+    const product = await productsApi.get(Number(id));
+    if (!product) notFound();
+    presenter = productsProcessor.toPresenter(product);
+  } catch {
+    notFound();
+  }
+
+  if (!presenter) notFound();
 
   return (
     <section className="space-y-8 sm:space-y-12 py-8 sm:py-14">
