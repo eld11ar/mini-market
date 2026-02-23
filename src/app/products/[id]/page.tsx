@@ -17,7 +17,7 @@ type Props = {
 export default async function ProductPage({ params }: Props) {
   const { id } = await params;
 
-  const product = await productsApi.getAlld(Number(id));
+  const product = await productsApi.get(Number(id));
 
   const presenter = productsProcessor.toPresenter(product);
 
