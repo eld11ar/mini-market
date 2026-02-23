@@ -22,13 +22,20 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
 
-  const product = await productsApi.get(Number(id));
-  const presenter = productsProcessor.toPresenter(product);
+  try {
+    const product = await productsApi.get(Number(id));
+    const presenter = productsProcessor.toPresenter(product);
 
-  return {
-    title: `${presenter.title} | Product Catalog`,
-    description: presenter.description.slice(0, 160),
-  };
+    return {
+      title: `${presenter.title} | Product Catalog`,
+      description: presenter.description.slice(0, 160),
+    };
+  } catch {
+    return {
+      title: "Product not found | Product Catalog",
+      description: "",
+    };
+  }
 }
 
 export default async function ProductPage({ params }: Props) {
