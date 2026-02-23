@@ -1,4 +1,5 @@
 import { ArrowLeft } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { productsApi, productsProcessor } from "@/entities/product";
@@ -13,6 +14,18 @@ type Params = {
 type Props = {
   params: Promise<Params>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+
+  const product = await productsApi.get(Number(id));
+  const presenter = productsProcessor.toPresenter(product);
+
+  return {
+    title: `${presenter.title} | Product Catalog`,
+    description: presenter.description.slice(0, 160),
+  };
+}
 
 export default async function ProductPage({ params }: Props) {
   const { id } = await params;

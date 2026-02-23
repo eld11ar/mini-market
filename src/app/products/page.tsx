@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { ProductList } from "@/widgets/ProductList";
+
+export const metadata: Metadata = {
+  title: "Product Catalog",
+  description:
+    "Browse all available products with up-to-date pricing and detailed descriptions",
+};
 
 export default async function ProductsPage() {
   return (

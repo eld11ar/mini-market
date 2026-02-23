@@ -1,6 +1,13 @@
 import { ArrowLeft } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { CartView } from "@/widgets/CartList";
+
+export const metadata: Metadata = {
+  title: "Shopping Cart | Store Name",
+  description:
+    "Review the products in your cart, update quantities, and proceed to checkout.",
+};
 
 export default function CartPage() {
   return (
