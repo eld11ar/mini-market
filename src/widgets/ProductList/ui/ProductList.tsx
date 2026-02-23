@@ -25,14 +25,14 @@ export const ProductList = ({ className, ...rest }: Props) => {
   const sorted = useSortProducts(productsPresenterList, sort);
 
   return (
-    <div className={cn("space-y-4", className)} {...rest}>
-      <div className="flex items-center justify-between gap-4">
+    <div className={cn("space-y-4 sm:space-y-6", className)} {...rest}>
+      <div className="flex flex-col gap-3 items-center sm:flex-row sm:justify-between sm:gap-4">
         <CategoryFilter value={category} onChange={setCategory} />
 
         <SortFilter value={sort} onChange={setSort} />
       </div>
 
-      <div className="grid grid-cols-4 gap-y-10 gap-x-8">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {isLoading
           ? Array.from({ length: 8 }).map((_, i) => (
               // biome-ignore lint/suspicious/noArrayIndexKey: false

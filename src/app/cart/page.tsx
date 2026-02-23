@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 
 export default function CartPage() {
   return (
-    <section className="py-14 space-y-8">
+    <section className="py-8 sm:py-14 space-y-8 sm:space-y-12">
       <Link
         href="/products"
-        className="w-fit flex items-center gap-2 text-2xl font-bold"
+        className="w-fit flex items-center gap-2 text-xl sm:text-2xl font-bold"
       >
         <ArrowLeft /> <span>Your Cart</span>
       </Link>

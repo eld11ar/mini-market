@@ -48,8 +48,6 @@ export const LayoutHeaderLinks = () => {
                     {link.count}
                   </span>
                 )}
-
-                <span className="sr-only">{link.label}</span>
               </Link>
             </TooltipTrigger>
             <TooltipContent>

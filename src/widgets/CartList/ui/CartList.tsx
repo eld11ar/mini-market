@@ -10,7 +10,7 @@ export const CartList = () => {
   const cartProductsArray = Object.values(cartProducts);
 
   return (
-    <div className="col-span-2 flex flex-col gap-4">
+    <div className="lg:col-span-2 flex flex-col gap-4">
       {cartProductsArray.map((cartProduct) => (
         <CartProductCard
           key={cartProduct.id}

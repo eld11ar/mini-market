@@ -28,8 +28,8 @@ export const AddToCartButton = ({ product }: Props) => {
       disabled={isAdded}
       onClick={handleAddToCart}
       className={cn(
-        "w-1/2 absolute bottom-[32%] left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100",
-        "transition-opacity duration-300",
+        "w-full sm:w-1/2 sm:absolute sm:bottom-[38%] sm:left-1/2 sm:-translate-x-1/2",
+        "sm:opacity-0 sm:group-hover:opacity-100 sm:transition-opacity sm:duration-300",
       )}
     >
       {isAdded ? (
