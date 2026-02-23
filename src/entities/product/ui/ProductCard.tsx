@@ -4,8 +4,8 @@ import type { ComponentProps, ReactNode } from "react";
 import { cn } from "@/shared/lib/utils";
 import { Badge } from "@/shared/ui/badge";
 import { StarRating } from "@/shared/ui/star-rating";
-import { productsProcessor } from "../../lib/processor";
-import type { ProductPresenter } from "../../model/types";
+import { productsProcessor } from "../lib/processor";
+import type { ProductPresenter } from "../model/types";
 
 type Props = ComponentProps<"div"> & {
   product: ProductPresenter;

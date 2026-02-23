@@ -1,8 +1,9 @@
+import type { ReactNode } from "react";
 import { LayoutFooter } from "./LayoutFooter";
 import { LayoutHeader } from "./LayoutHeader";
 
 type Props = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export const BaseLayout = ({ children }: Props) => {

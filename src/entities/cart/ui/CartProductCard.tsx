@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { productsProcessor } from "@/entities/product";
 import { cn } from "@/shared/lib/utils";
 import type { CartProduct } from "../model/types";
 
 type Props = {
   cartProduct: CartProduct;
-  footerSlot?: React.ReactNode;
+  footerSlot?: ReactNode;
 };
 
 export const CartProductCard = ({ cartProduct, footerSlot }: Props) => {

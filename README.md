@@ -1,36 +1,146 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛍️ Mini Marketplace
 
-## Getting Started
+Мини-маркетплейс на базе [Fake Store API](https://fakestoreapi.com/)
 
-First, run the development server:
+## 🚀 Демо
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+> [Ссылка на деплой](https://mini-market-pied.vercel.app/) · [GitHub](https://github.com/eld11ar/mini-market)
+
+---
+
+## 📦 Стек
+
+| Слой               | Технология                    |
+|--------------------|-------------------------------|
+| Фреймворк          | Next.js 14 (App Router)       |
+| Язык               | JavaScript/TypeScript         |
+| Стейт-менеджер     | Zustand                       |
+| Клиентские запросы | TanStack Query                |
+| UI-компоненты      | shadcn/ui                     |
+| Стилизация         | Tailwind CSS                  |
+| Архитектура        | Feature-Sliced Design (FSD)   |
+
+---
+
+## 🗂️ Архитектура (FSD)
+
+Проект организован по методологии [Feature-Sliced Design](https://feature-sliced.design/):
+
+```
+src/
+├── app/                        # Next.js App Router: layout, страницы
+│   ├── layout.tsx
+│   ├── products/
+│   │   ├── page.tsx            # Каталог (клиентская страница)
+│   │   └── [id]/
+│   │       └── page.tsx        # Страница товара (SSR)
+│   └── cart/
+│       └── page.tsx            # Корзина
+│
+├── widgets/                    # Самодостаточные блоки UI
+│   ├── productList/            # Сетка карточек с фильтрами и сортировкой
+│   └── cartList/               # Корзина
+│
+├── features/                   # Пользовательские сценарии
+│   ├── cart/
+│   │   ├── addToCartButton.tsx          # Добавление товара в корзину
+│   │   ├── removeCartFromCardButton.tsx # Удаление товара из корзины
+│   │   └── changeCartQuantity.tsx       # Изменение количества
+│   └── filters/
+│       ├── categoryFilter.tsx           # Фильтрация по категории
+│       └── sortFilter.tsx               # Сортировка по цене / рейтингу / по алфавиту
+│
+├── entities/                   # Бизнес-сущности
+│   ├── category/               # Тип Category, api, хуки запросов
+│   ├── product/                # Тип Product, api, карточка, хуки запросов
+│   └── cart/                   # Тип CartItem, store
+│
+└── shared/                     # Переиспользуемое
+    ├── api/                    # Базовая конфигурация api
+    ├── ui/                     # Базовые UI-компоненты (кнопка, бейдж, скелетон)
+    └── lib/                    # Утилиты (cn)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Ключевые решения
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**SSR на странице товара** — SSR.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**TanStack Query на клиенте** — каталог и категории управляются через `tanstack query`.
 
-## Learn More
+**Zustand + Immer для корзины** — стор персистируется через `zustand/middleware/persist` в `localStorage`, мутации состояния написаны через `immer` — читаемо и без лишнего spread-бойлерплейта.
 
-To learn more about Next.js, take a look at the following resources:
+**Pre-commit и pre-push хуки** — через `lefthook` + `biome`: линтинг и форматирование запускаются автоматически перед каждым коммитом и пушем, что исключает попадание неотформатированного кода в репозиторий.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ⚙️ Локальный запуск
 
-## Deploy on Vercel
+### Требования
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Node.js >= 18
+- npm / pnpm / yarn
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Установка
+
+```bash
+git clone https://github.com/eld11ar/mini-market
+cd mini-marketplace
+pnpm install
+```
+
+### Запуск в режиме разработки
+
+```bash
+pnpm run dev
+```
+
+Откройте [http://localhost:3000](http://localhost:3000).
+
+### Продакшн-сборка
+
+```bash
+npm run build
+npm run start
+```
+
+## 🔍 Функционал
+
+### `/products` — Каталог
+
+- Список товаров с изображением, названием, ценой и рейтингом
+- Фильтрация по категории (данные из API, без хардкода)
+- Сортировка по цене и рейтингу, алфавиту (по возрастанию / убыванию)
+- Skeleton-загрузка и отображение ошибки
+
+### `/products/[id]` — Страница товара
+
+- SSR: данные приходят готовыми, нет мерцания
+- Полная информация о товаре
+- Кнопка для добавление в корзину
+
+### Корзина
+
+- Глобальный store (Zustand + persist)
+- Изменение количества позиций
+- Удаление позиций
+- Отображение итоговой суммы
+- Доступ через иконку в шапке
+
+---
+
+## 📁 Переменные окружения
+
+Проект не требует ключей API — Fake Store API открытый. При необходимости можно переопределить базовый URL:
+
+```env
+# .env.local
+NEXT_PUBLIC_API_URL=https://fakestoreapi.com
+```
+
+---
+
+## 📝 Заметки
+
+- Все сетевые запросы типизированы — `any` не используется
+- Компоненты разделены на серверные и клиентские (`'use client'` только там, где нужно)
+- Адаптивная вёрстка: мобайл → планшет → десктоп
