@@ -21,16 +21,17 @@ export const ProductCard = ({
   const detailsLink = `/products/${product.id}`;
 
   return (
-    <div className={cn("flex flex-col gap-4", className)} {...rest}>
+    <div className={cn("flex flex-col gap-3 sm:gap-4", className)} {...rest}>
       <Link
         href={detailsLink}
-        className="group bg-gray-100 rounded-2xl p-3 overflow-hidden"
+        className="group bg-gray-100 rounded-2xl p-3 sm:p-4 gap-3 sm:gap-4 overflow-hidden"
       >
-        <div className="relative w-77 h-75 mx-auto">
+        <div className="relative w-full aspect-[4/3] sm:aspect-square">
           <Image
             src={product.image}
             alt={product.title}
             fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             placeholder="blur"
             blurDataURL={product.image}
             className="object-contain object-center transition-transform duration-300 group-hover:scale-105"
@@ -38,15 +39,18 @@ export const ProductCard = ({
         </div>
       </Link>
 
-      <div className="flex-1 flex flex-col gap-1 justify-between">
-        <Badge variant="secondary" className="capitalize">
+      <div className="flex-1 flex flex-col justify-between gap-1.5 sm:gap-2">
+        <Badge
+          variant="secondary"
+          className="capitalize w-fit text-xs sm:text-sm"
+        >
           {product.category}
         </Badge>
 
         <Link
           href={detailsLink}
           className={cn(
-            "font-medium leading-5 line-clamp-2 text-balance underline decoration-transparent",
+            "text-sm sm:text-base font-medium leading-5 line-clamp-2 text-balance underline decoration-transparent",
             "transition-all duration-300 hover:decoration-primary hover:underline-offset-4",
           )}
         >
@@ -55,7 +59,7 @@ export const ProductCard = ({
 
         <StarRating rate={product.rate} count={product.count} />
 
-        <span className="font-bold">
+        <span className="text-base sm:text-lg font-bold">
           {productsProcessor.formatPrice(product.price)}
         </span>
       </div>

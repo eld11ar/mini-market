@@ -9,7 +9,7 @@ export const CartTotal = () => {
   const totalPrice = useCartProductStore((state) => state.totalCartPrice());
 
   return (
-    <div className="space-y-4 p-6 bg-gray-50 rounded-lg">
+    <div className="lg:col-span-1 space-y-4 p-4 sm:p-6 bg-gray-50 rounded-lg">
       <div className="space-y-1">
         <h2 className="text-xl font-bold">Your Cart</h2>
 

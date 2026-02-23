@@ -1,11 +1,13 @@
 "use client";
 
 import { Minus, Plus } from "lucide-react";
+import type { ComponentProps } from "react";
 import { useCartProductStore } from "@/entities/cart";
 import type { ProductPresenter } from "@/entities/product";
+import { cn } from "@/shared/lib/utils";
 import { Button, type ButtonVariants } from "@/shared/ui/button";
 
-type Props = {
+type Props = ComponentProps<"div"> & {
   product: ProductPresenter;
   size?: BtnSize;
 };
@@ -17,7 +19,12 @@ const SIZES = {
   large: "icon-lg",
 } satisfies Record<BtnSize, ButtonVariants["size"]>;
 
-export const ChangeCartQuantity = ({ product, size }: Props) => {
+export const ChangeCartQuantity = ({
+  product,
+  size,
+  className,
+  ...rest
+}: Props) => {
   const addToCart = useCartProductStore((state) => state.addToCart);
   const onUpdateQuantity = useCartProductStore(
     (state) => state.onUpdateQuantity,
@@ -43,7 +50,7 @@ export const ChangeCartQuantity = ({ product, size }: Props) => {
   };
 
   return (
-    <div className="flex items-center gap-1">
+    <div className={cn("flex items-center gap-1", className)} {...rest}>
       <Button
         type="button"
         size={btnSize}

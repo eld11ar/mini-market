@@ -12,20 +12,20 @@ type Props = {
 
 export const CartProductCard = ({ cartProduct, footerSlot }: Props) => {
   return (
-    <div className="flex items-center gap-6">
-      <div className="relative min-w-25 h-33.25 bg-gray-100 rounded-2xl overflow-hidden">
+    <div className="flex items-center gap-3 sm:gap-6">
+      <div className="relative w-20 h-20 sm:w-24 sm:h-28 bg-gray-100 rounded-2xl overflow-hidden">
         <Image
           src={cartProduct.image}
           alt={cartProduct.title}
           fill
-          sizes="100px"
+          sizes="(max-width: 640px) 80px, 100px"
           className="object-contain p-1"
         />
       </div>
 
-      <div className="flex-1 flex flex-col gap-2 py-2 border-b">
+      <div className="flex-1 flex flex-col gap-2 py-1 sm:py-2 border-b">
         <div className="flex items-center justify-between gap-2">
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1 sm:gap-2">
             <Link
               href={`/products/${cartProduct.id}`}
               className={cn(
@@ -36,12 +36,12 @@ export const CartProductCard = ({ cartProduct, footerSlot }: Props) => {
               {cartProduct.quantity} X {cartProduct.title}
             </Link>
 
-            <p className="text-pretty text-sm line-clamp-2 text-muted-foreground">
+            <p className="text-pretty text-xs sm:text-sm line-clamp-2 text-muted-foreground">
               {cartProduct.description}
             </p>
           </div>
 
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm sm:text-base text-muted-foreground">
             {productsProcessor.formatPrice(
               cartProduct.price * cartProduct.quantity,
             )}
