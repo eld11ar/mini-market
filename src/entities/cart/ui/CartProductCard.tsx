@@ -9,10 +9,7 @@ type Props = {
   footerSlot?: React.ReactNode;
 };
 
-export const CartProductCard = ({
-  cartProduct,
-  footerSlot
-}: Props) => {
+export const CartProductCard = ({ cartProduct, footerSlot }: Props) => {
   return (
     <div className="flex items-center gap-6">
       <div className="relative min-w-25 h-33.25 bg-gray-100 rounded-2xl overflow-hidden">
@@ -29,7 +26,7 @@ export const CartProductCard = ({
         <div className="flex items-center justify-between gap-2">
           <div className="flex flex-col gap-2">
             <Link
-              href={`/product/${cartProduct.id}`}
+              href={`/products/${cartProduct.id}`}
               className={cn(
                 "text-pretty line-clamp-2 font-medium leading-tight underline decoration-transparent",
                 "hover:decoration-primary transition-colors",
@@ -38,7 +35,9 @@ export const CartProductCard = ({
               {cartProduct.quantity} X {cartProduct.title}
             </Link>
 
-            <p className="text-pretty text-sm line-clamp-2 text-muted-foreground">{cartProduct.description}</p>
+            <p className="text-pretty text-sm line-clamp-2 text-muted-foreground">
+              {cartProduct.description}
+            </p>
           </div>
 
           <p className="text-sm text-muted-foreground">

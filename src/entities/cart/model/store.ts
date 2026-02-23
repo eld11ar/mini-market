@@ -4,11 +4,11 @@ import { immer } from "zustand/middleware/immer";
 import type { ProductPresenter } from "@/entities/product";
 import type { CartProduct } from "./types";
 
-interface CartProductState {
+type CartProductState = {
   cartProducts: Record<number, CartProduct>;
-}
+};
 
-interface CartProductActions {
+type CartProductActions = {
   addToCart: (product: ProductPresenter) => void;
   removeFromCart: (productId: number) => void;
   clearCart: () => void;
@@ -17,7 +17,7 @@ interface CartProductActions {
 
   totalCartProducts: () => number;
   totalCartPrice: () => number;
-}
+};
 
 const cardProductState: CartProductState = {
   cartProducts: {},
@@ -40,22 +40,32 @@ export const useCartProductStore = create<
               state.cartProducts[product.id] = { ...product, quantity: 1 };
             }
           }),
-        removeFromCart: (productId) => set((state) => {
-          delete state.cartProducts[productId];
-        }),
+        removeFromCart: (productId) =>
+          set((state) => {
+            delete state.cartProducts[productId];
+          }),
         clearCart: () => set(() => cardProductState),
 
-        onUpdateQuantity: (productId, quantity) => set((state) => {
-          if (quantity <= 0) {
-            delete state.cartProducts[productId];
-          } else {
-            state.cartProducts[productId].quantity = quantity;
-          }
-        }),
+        onUpdateQuantity: (productId, quantity) =>
+          set((state) => {
+            if (quantity <= 0) {
+              delete state.cartProducts[productId];
+            } else {
+              state.cartProducts[productId].quantity = quantity;
+            }
+          }),
 
-        totalCartProducts: () => Object.values(get().cartProducts).reduce((total, item) => total + item.quantity, 0),
+        totalCartProducts: () =>
+          Object.values(get().cartProducts).reduce(
+            (total, item) => total + item.quantity,
+            0,
+          ),
 
-        totalCartPrice: () => Object.values(get().cartProducts).reduce((total, item) => total + item.price * item.quantity, 0),
+        totalCartPrice: () =>
+          Object.values(get().cartProducts).reduce(
+            (total, item) => total + item.price * item.quantity,
+            0,
+          ),
       })),
       {
         version: 1,

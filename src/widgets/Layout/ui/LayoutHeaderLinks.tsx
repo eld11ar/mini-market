@@ -7,7 +7,9 @@ import { cn } from "@/shared/lib/utils";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip";
 
 export const LayoutHeaderLinks = () => {
-  const totalCartItems = useCartProductStore((state) => state.totalCartProducts());
+  const totalCartItems = useCartProductStore((state) =>
+    state.totalCartProducts(),
+  );
 
   const LINKS = [
     {

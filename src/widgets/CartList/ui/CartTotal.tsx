@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useCartProductStore } from "@/entities/cart";
 import { productsProcessor } from "@/entities/product";
@@ -19,8 +19,14 @@ export const CartTotal = () => {
               key={cartProduct.id}
               className="flex justify-between gap-1.5 py-2 text-sm text-pretty border-b last:border-b-0"
             >
-              <span>{cartProduct.quantity} x {cartProduct.title}</span>
-              <span className="text-muted-foreground">{productsProcessor.formatPrice(cartProduct.price * cartProduct.quantity)}</span>
+              <span>
+                {cartProduct.quantity} x {cartProduct.title}
+              </span>
+              <span className="text-muted-foreground">
+                {productsProcessor.formatPrice(
+                  cartProduct.price * cartProduct.quantity,
+                )}
+              </span>
             </li>
           ))}
         </ul>
@@ -35,5 +41,5 @@ export const CartTotal = () => {
         Place an order
       </Button>
     </div>
-  )
-}
+  );
+};

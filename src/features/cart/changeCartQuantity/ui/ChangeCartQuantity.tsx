@@ -1,36 +1,65 @@
+"use client";
+
 import { Minus, Plus } from "lucide-react";
 import { useCartProductStore } from "@/entities/cart";
-import type { ProductId } from "@/entities/product";
-import { Button } from "@/shared/ui/button";
+import type { ProductPresenter } from "@/entities/product";
+import { Button, type ButtonVariants } from "@/shared/ui/button";
 
 type Props = {
-  productId: ProductId;
+  product: ProductPresenter;
+  size?: BtnSize;
 };
 
-export const ChangeCartQuantity = ({ productId }: Props) => {
+type BtnSize = "small" | "large";
+
+const SIZES = {
+  small: "icon-sm",
+  large: "icon-lg",
+} satisfies Record<BtnSize, ButtonVariants["size"]>;
+
+export const ChangeCartQuantity = ({ product, size }: Props) => {
+  const addToCart = useCartProductStore((state) => state.addToCart);
   const onUpdateQuantity = useCartProductStore(
     (state) => state.onUpdateQuantity,
   );
-  const item = useCartProductStore((state) => state.cartProducts[productId]);
+  const cartProduct = useCartProductStore(
+    (state) => state.cartProducts[product.id],
+  );
+
+  const carProductQuantity = cartProduct?.quantity ?? 0;
+
+  const btnSize = size ? SIZES[size] : "icon-sm";
+
+  const handleIncrease = () => {
+    if (!cartProduct) {
+      addToCart(product);
+    } else {
+      onUpdateQuantity(product.id, carProductQuantity + 1);
+    }
+  };
+
+  const handleDecrease = () => {
+    onUpdateQuantity(product.id, carProductQuantity - 1);
+  };
 
   return (
     <div className="flex items-center gap-1">
       <Button
         type="button"
-        size="icon-sm"
+        size={btnSize}
         variant="outline"
-        onClick={() => onUpdateQuantity(productId, item.quantity - 1)}
+        onClick={handleDecrease}
       >
         <Minus />
       </Button>
       <span className="w-6 text-center text-sm font-semibold">
-        {item.quantity}
+        {carProductQuantity}
       </span>
       <Button
         type="button"
-        size="icon-sm"
+        size={btnSize}
         variant="outline"
-        onClick={() => onUpdateQuantity(productId, item.quantity + 1)}
+        onClick={handleIncrease}
       >
         <Plus />
       </Button>

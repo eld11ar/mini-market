@@ -12,7 +12,12 @@ type Props = ComponentProps<"div"> & {
   onAddToCartAction?: ReactNode;
 };
 
-export const ProductCard = ({ product, onAddToCartAction, className, ...rest }: Props) => {
+export const ProductCard = ({
+  product,
+  onAddToCartAction,
+  className,
+  ...rest
+}: Props) => {
   const detailsLink = `/products/${product.id}`;
 
   return (

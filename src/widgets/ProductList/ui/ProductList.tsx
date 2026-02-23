@@ -35,17 +35,17 @@ export const ProductList = ({ className, ...rest }: Props) => {
       <div className="grid grid-cols-4 gap-y-10 gap-x-8">
         {isLoading
           ? Array.from({ length: 8 }).map((_, i) => (
-            // biome-ignore lint/suspicious/noArrayIndexKey: false
-            <ProductSkeleton key={i} />
-          ))
+              // biome-ignore lint/suspicious/noArrayIndexKey: false
+              <ProductSkeleton key={i} />
+            ))
           : sorted.map((product) => (
-            <ProductCard
-              className="group relative"
-              key={product.id}
-              product={product}
-              onAddToCartAction={<AddToCartButton product={product} />}
-            />
-          ))}
+              <ProductCard
+                className="group relative"
+                key={product.id}
+                product={product}
+                onAddToCartAction={<AddToCartButton product={product} />}
+              />
+            ))}
       </div>
     </div>
   );

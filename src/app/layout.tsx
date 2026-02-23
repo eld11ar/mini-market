@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import Script from "next/script";
-import { BaseLayout } from "@/widgets/Layout";
-import { TooltipProvider } from "@/shared/ui/tooltip";
 import { TanstackProvider } from "@/shared/providers/TanstackProvider";
+import { TooltipProvider } from "@/shared/ui/tooltip";
+import { BaseLayout } from "@/widgets/Layout";
 import "./globals.css";
 
 const dmSans = DM_Sans({

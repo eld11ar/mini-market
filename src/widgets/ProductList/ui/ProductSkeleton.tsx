@@ -12,4 +12,4 @@ export const ProductSkeleton = () => {
       </div>
     </div>
   );
-}
+};

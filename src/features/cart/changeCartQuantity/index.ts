@@ -1,1 +1,1 @@
-export {ChangeCartQuantity} from "./ui/ChangeCartQuantity";
+export { ChangeCartQuantity } from "./ui/ChangeCartQuantity";
