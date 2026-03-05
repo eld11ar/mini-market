@@ -1,86 +1,83 @@
 # 🛍️ Mini Marketplace
 
-Мини-маркетплейс на базе [Fake Store API](https://fakestoreapi.com/)
+A mini marketplace built on top of the [Fake Store API](https://fakestoreapi.com/)
 
-## 🚀 Демо
+## 🚀 Demo
 
-> [Ссылка на деплой](https://mini-market-pied.vercel.app/) · [GitHub](https://github.com/eld11ar/mini-market)
+> [Deployment link](https://mini-market-pied.vercel.app/) · [GitHub](https://github.com/eld11ar/mini-market)
 
 ---
 
-## 📦 Стек
+## 📦 Stack
 
-| Слой               | Технология                   |
+| Layer              | Technology                   |
 |--------------------|------------------------------|
-| Фреймворк          | Next.js (App Router)         |
-| Язык               | JavaScript/TypeScript        |
-| Стейт-менеджер     | Zustand                      |
-| Клиентские запросы | TanStack Query               |
-| UI-компоненты      | shadcn/ui                    |
-| Стилизация         | Tailwind CSS                 |
-| Архитектура        | Feature-Sliced Design (FSD)  |
+| Framework          | Next.js (App Router)         |
+| Language           | JavaScript/TypeScript        |
+| State management   | Zustand                      |
+| Client requests    | TanStack Query               |
+| UI components      | shadcn/ui                    |
+| Styling            | Tailwind CSS                 |
+| Architecture       | Feature‑Sliced Design (FSD)  |
 
 ---
 
-## 🗂️ Архитектура (FSD)
+## 🗂️ Architecture (FSD)
 
-Проект организован по методологии [Feature-Sliced Design](https://feature-sliced.design/):
+The project is organized according to the [Feature‑Sliced Design](https://feature-sliced.design/) methodology:
 
 ```
 src/
-├── app/                        # Next.js App Router: layout, страницы
+├── app/                        # Next.js App Router: layout, pages
 │   ├── layout.tsx
 │   ├── products/
-│   │   ├── page.tsx            # Каталог (клиентская страница)
+│   │   ├── page.tsx            # Catalog (client page)
 │   │   └── [id]/
-│   │       └── page.tsx        # Страница товара (SSR)
+│   │       └── page.tsx        # Product page (SSR)
 │   └── cart/
-│       └── page.tsx            # Корзина
+│       └── page.tsx            # Cart
 │
-├── widgets/                    # Самодостаточные блоки UI
-│   ├── productList/            # Сетка карточек с фильтрами и сортировкой
-│   └── cartList/               # Корзина
+├── widgets/                    # Self‑contained UI blocks
+│   ├── productList/            # Grid of cards with filters & sorting
+│   └── cartList/               # Cart
 │
-├── features/                   # Пользовательские сценарии
+├── features/                   # User scenarios
 │   ├── cart/
-│   │   ├── addToCartButton.tsx          # Добавление товара в корзину
-│   │   ├── removeCartFromCardButton.tsx # Удаление товара из корзины
-│   │   └── changeCartQuantity.tsx       # Изменение количества
+│   │   ├── addToCartButton.tsx          # Add item to cart
+│   │   ├── removeCartFromCardButton.tsx # Remove item from cart
+│   │   └── changeCartQuantity.tsx       # Change quantity
 │   └── filters/
-│       ├── categoryFilter.tsx           # Фильтрация по категории
-│       └── sortFilter.tsx               # Сортировка по цене / рейтингу / по алфавиту
+│       ├── categoryFilter.tsx           # Filter by category
+│       └── sortFilter.tsx               # Sort by price / rating / name
 │
-├── entities/                   # Бизнес-сущности
-│   ├── category/               # Тип Category, api, хуки запросов
-│   ├── product/                # Тип Product, api, карточка, хуки запросов
-│   └── cart/                   # Тип CartItem, store
+├── entities/                   # Business entities
+│   ├── category/               # Category type, API, query hooks
+│   ├── product/                # Product type, API, card, query hooks
+│   └── cart/                   # CartItem type, store
 │
-└── shared/                     # Переиспользуемое
-    ├── api/                    # Базовая конфигурация api
-    ├── ui/                     # Базовые UI-компоненты (кнопка, бейдж, скелетон)
-    └── lib/                    # Утилиты (cn)
+└── shared/                     # Re‑usable code
+    ├── api/                    # Base API configuration
+    ├── ui/                     # Base UI components (button, badge, skeleton)
+    └── lib/                    # Utilities (cn)
 ```
 
-### Ключевые решения
+### Key decisions
 
-**SSR на странице товара** — SSR.
-
-**TanStack Query на клиенте** — каталог и категории управляются через `tanstack query`.
-
-**Zustand + Immer для корзины** — стор персистируется через `zustand/middleware/persist` в `localStorage`, мутации состояния написаны через `immer` — читаемо и без лишнего spread-бойлерплейта.
-
-**Pre-commit и pre-push хуки** — через `lefthook` + `biome`: линтинг и форматирование запускаются автоматически перед каждым коммитом и пушем, что исключает попадание неотформатированного кода в репозиторий.
+- **SSR on product page** – server‑side rendering.
+- **TanStack Query on client** – catalog and categories managed with TanStack Query.
+- **Zustand + Immer for cart** – the store is persisted with `zustand/middleware/persist` to `localStorage`; state mutations use Immer for readable code without boilerplate.
+- **Pre‑commit and pre‑push hooks** – Lefthook + Biome run linting/formatting automatically before every commit/push to prevent unformatted code from entering the repository.
 
 ---
 
-## ⚙️ Локальный запуск
+## ⚙️ Running locally
 
-### Требования
+### Requirements
 
-- Node.js >= 18
+- Node.js ≥ 18
 - npm / pnpm / yarn
 
-### Установка
+### Install
 
 ```bash
 git clone https://github.com/eld11ar/mini-market
@@ -88,49 +85,49 @@ cd mini-marketplace
 pnpm install
 ```
 
-### Запуск в режиме разработки
+### Development mode
 
 ```bash
 pnpm run dev
 ```
 
-Откройте [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000).
 
-### Продакшн-сборка
+### Production build
 
 ```bash
 npm run build
 npm run start
 ```
 
-## 🔍 Функционал
+## 🔍 Features
 
-### `/products` — Каталог
+### `/products` – Catalog
 
-- Список товаров с изображением, названием, ценой и рейтингом
-- Фильтрация по категории (данные из API, без хардкода)
-- Сортировка по цене и рейтингу, алфавиту (по возрастанию / убыванию)
-- Skeleton-загрузка и отображение ошибки
+- Product list with image, title, price and rating
+- Category filtering (data from API, no hard‑coding)
+- Sorting by price and rating, alphabetically (asc/desc)
+- Skeleton loader and error display
 
-### `/products/[id]` — Страница товара
+### `/products/[id]` – Product page
 
-- SSR: данные приходят готовыми, нет мерцания
-- Полная информация о товаре
-- Кнопка для добавление в корзину
+- SSR: data arrives ready, no flicker
+- Full product information
+- Button to add to cart
 
-### Корзина
+### Cart
 
-- Глобальный store (Zustand + persist)
-- Изменение количества позиций
-- Удаление позиций
-- Отображение итоговой суммы
-- Доступ через иконку в шапке
+- Global store (Zustand + persist)
+- Change item quantities
+- Remove items
+- Display total sum
+- Access via icon in header
 
 ---
 
-## 📁 Переменные окружения
+## 📁 Environment variables
 
-Проект не требует ключей API — Fake Store API открытый. При необходимости можно переопределить базовый URL:
+The project doesn’t require API keys – Fake Store API is public. You can override the base URL if needed:
 
 ```env
 # .env.local
@@ -139,8 +136,8 @@ NEXT_PUBLIC_API_URL=https://fakestoreapi.com
 
 ---
 
-## 📝 Заметки
+## 📝 Notes
 
-- Все сетевые запросы типизированы — `any` не используется
-- Компоненты разделены на серверные и клиентские (`'use client'` только там, где нужно)
-- Адаптивная вёрстка: мобайл → планшет → десктоп
+- All network requests are typed – `any` is not used.
+- Components are split into server and client (`'use client'` only where necessary).
+- Responsive layout: mobile → tablet → desktop.
